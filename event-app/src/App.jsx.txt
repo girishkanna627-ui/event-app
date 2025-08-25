@@ -1,0 +1,36 @@
+import React, { useState } from 'react'
+
+const services = [
+  { id: 1, name: "DJ Party Pro", price: "₹10,000", rating: 4.5, category: "DJ" },
+  { id: 2, name: "Golden Memories Photographer", price: "₹8,000", rating: 4.8, category: "Photographer" },
+  { id: 3, name: "Royal Caterers", price: "₹15,000", rating: 4.6, category: "Caterer" },
+]
+
+export default function App() {
+  const [selected, setSelected] = useState(null)
+
+  return (
+    <div className="container">
+      <h1>Event Services</h1>
+      <div className="grid">
+        {services.map(s => (
+          <div key={s.id} className="card" onClick={() => setSelected(s)}>
+            <h2>{s.name}</h2>
+            <p>{s.category}</p>
+            <p>💰 {s.price}</p>
+            <p>⭐ {s.rating}</p>
+          </div>
+        ))}
+      </div>
+
+      {selected && (
+        <div className="modal">
+          <h2>{selected.name}</h2>
+          <p>Category: {selected.category}</p>
+          <p>Price: {selected.price}</p>
+          <button onClick={() => setSelected(null)}>Close</button>
+        </div>
+      )}
+    </div>
+  )
+}
